@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--text size-->
+    <dimen name="xxxxx_large_text">30sp</dimen>
+    <dimen name="xxxx_large_text">25sp</dimen>
+    <dimen name="xxx_large_text">22sp</dimen>
+    <dimen name="xx_large_text">20sp</dimen>
+    <dimen name="x_large_text">17sp</dimen>
+    <dimen name="medium_text">16sp</dimen>
+    <dimen name="x_small_text">15sp</dimen>
+    <dimen name="xx_small_text">14sp</dimen>
+    <dimen name="xxx_small_text">12sp</dimen>
+    <dimen name="xxxx_small_text">10sp</dimen>
+
+    <!--message dialog-->
+    <dimen name="message_dialog_width">280dp</dimen>
+
+    <dimen name="height_line_divider">1dp</dimen>
+    <dimen name="image_size_24">24dp</dimen>
+    <dimen name="button_bottom_height">60dp</dimen>
+    <dimen name="edit_text_container_height">54dp</dimen>
+    <dimen name="edit_text_container_height_profile_screen">40dp</dimen>
+
+    <!--choose screen-->
+    <dimen name="auth_toolbar_height">180dp</dimen>
+
+    <!--confirm screen-->
+    <dimen name="edit_text_digit_width">30dp</dimen>
+
+    <dimen name="toolbar_with_logo_height">110dp</dimen>
+    <dimen name="toolbar_with_venue_photo_height">115dp</dimen>
+    <dimen name="navigation_bar_height">56dp</dimen>
+    <dimen name="receipt_item_height">54dp</dimen>
+    <dimen name="receipt_header_item_height">40dp</dimen>
+    <dimen name="venue_name_margin_top">45dp</dimen>
+    <dimen name="venue_name_height">40dp</dimen>
+    <dimen name="venue_basic_info_height">112dp</dimen>
+    <dimen name="venue_photo_size">80dp</dimen>
+    <dimen name="height_item_venue">55dp</dimen>
+    <dimen name="venue_info_item_height">54dp</dimen>
+    <dimen name="price_info_container_height">70dp</dimen>
+    <dimen name="quantity_people_container_width">140dp</dimen>
+
+    <!--number picker dialog-->
+    <dimen name="number_picker_dialog_width">280dp</dimen>
+    <dimen name="dialog_button_height">40dp</dimen>
+    <dimen name="number_picker_width">40dp</dimen>
+    <dimen name="number_picker_height">130dp</dimen>
+
+    <!--call dialog-->
+    <dimen name="call_dialog_width">280dp</dimen>
+
+</resources>

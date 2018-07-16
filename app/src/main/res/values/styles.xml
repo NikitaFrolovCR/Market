@@ -1,11 +1,234 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="android:colorBackground">@color/bg_white</item>
     </style>
 
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:colorBackground">@color/bg_darkCerulean</item>
+    </style>
+
+    <style name="ProgressTheme">
+        <item name="android:background">@color/bg_black_7D</item>
+    </style>
+
+    <style name="RobotoLightTextStyle">
+        <item name="android:fontFamily">@font/roboto_light</item>
+    </style>
+
+    <style name="RobotoBoldTextStyle">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="RobotoMediumTextStyle">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="RobotoRegularTextStyle">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="RobotoLightCharcoalXXXSmallTextStyle" parent="RobotoLightTextStyle">
+        <item name="android:textSize">@dimen/xxx_small_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="RobotoBoldCharcoalMediumTextStyle" parent="RobotoBoldTextStyle">
+        <item name="android:textSize">@dimen/medium_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="RobotoMediumPaleAquaMediumTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/medium_text</item>
+        <item name="android:textColor">@color/text_paleAqua</item>
+    </style>
+
+    <style name="RobotoBoldDarkCeruleanXXSmallTextStyle" parent="RobotoBoldTextStyle">
+        <item name="android:textSize">@dimen/xx_small_text</item>
+        <item name="android:textColor">@color/text_darkCerulean</item>
+    </style>
+
+    <style name="RobotoBoldCharcoalXXSmallTextStyle" parent="RobotoBoldTextStyle">
+        <item name="android:textSize">@dimen/xx_small_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="RobotoMediumDarkCeruleanCCXXSmallTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/xx_small_text</item>
+        <item name="android:textColor">@color/text_darkCerulean_CC</item>
+    </style>
+
+    <style name="RobotoMediumCapitalizeXSmallTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/x_small_text</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="RobotoMediumCharcoalXXXXLargeTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/xxxx_large_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="RobotoMediumCharcoalXLargeTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/x_large_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="RobotoMediumSeaBlueXXSmallTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/xx_small_text</item>
+        <item name="android:textColor">@color/text_seaBlue</item>
+    </style>
+
+    <style name="RobotoMediumSeaBlueXSmallTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/x_small_text</item>
+        <item name="android:textColor">@color/text_seaBlue</item>
+    </style>
+
+    <style name="RobotoMediumSeaBlueXXLargeTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/xx_large_text</item>
+        <item name="android:textColor">@color/text_seaBlue</item>
+    </style>
+
+    <style name="RobotoMediumCharcoalXSmallTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/x_small_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="RobotoMediumDarkCeruleanXSmallTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/x_small_text</item>
+        <item name="android:textColor">@color/text_darkCerulean</item>
+    </style>
+
+    <style name="RobotoMediumDarkCeruleanXXSmallTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/xx_small_text</item>
+        <item name="android:textColor">@color/text_darkCerulean</item>
+    </style>
+
+    <style name="RobotoRegularCharcoalXSmallTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/x_small_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="RobotoRegularCharcoal3DXSmallTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/x_small_text</item>
+        <item name="android:textColor">@color/text_charcoal_3D</item>
+    </style>
+
+    <style name="RobotoRegularCharcoalMediumTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/medium_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="RobotoRegularCharcoalXXXSmallTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/xxx_small_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="RobotoRegularSeaBlueXSmallTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/x_small_text</item>
+        <item name="android:textColor">@color/text_seaBlue</item>
+    </style>
+
+    <style name="RobotoRegularSeaBlueB4XSmallTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/x_small_text</item>
+        <item name="android:textColor">@color/text_seaBlue_b4</item>
+    </style>
+
+    <style name="RobotoRegularSeaBlueXXSmallTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/xx_small_text</item>
+        <item name="android:textColor">@color/text_seaBlue</item>
+    </style>
+
+    <style name="RobotoRegularSeaBlueMediumTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/medium_text</item>
+        <item name="android:textColor">@color/text_seaBlue</item>
+    </style>
+
+    <style name="RobotoRegularRoseMadderXSmallTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/x_small_text</item>
+        <item name="android:textColor">@color/text_roseMadder</item>
+    </style>
+
+    <style name="RobotoRegularCharcoalXXSmallTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/xx_small_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="RobotoRegularWhiteXSmallTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/x_small_text</item>
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
+    <style name="RobotoBoldWhiteXLargeTextStyle" parent="RobotoBoldTextStyle">
+        <item name="android:textSize">@dimen/x_large_text</item>
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
+    <style name="RobotoBoldWhiteXXXXXLargeTextStyle" parent="RobotoBoldTextStyle">
+        <item name="android:textSize">@dimen/xxxxx_large_text</item>
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
+    <style name="RobotoBoldSeaBlueXSmallTextStyle" parent="RobotoBoldTextStyle">
+        <item name="android:textSize">@dimen/x_small_text</item>
+        <item name="android:textColor">@color/text_seaBlue</item>
+    </style>
+
+    <style name="RobotoBoldSeaBlueXXLargeTextStyle" parent="RobotoBoldTextStyle">
+        <item name="android:textSize">@dimen/xx_large_text</item>
+        <item name="android:textColor">@color/text_seaBlue</item>
+    </style>
+
+    <style name="RobotoRegularWhiteXLargeTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/x_large_text</item>
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
+    <style name="RobotoRegularCharcoal9AXXXSmallTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/xxx_small_text</item>
+        <item name="android:textColor">@color/text_charcoal_9a</item>
+    </style>
+
+    <style name="RobotoRegularCharcoal80XXXSmallTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/xxx_small_text</item>
+        <item name="android:textColor">@color/text_charcoal_80</item>
+    </style>
+
+    <style name="RobotoRegularCharcoal9AXLargeTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/x_large_text</item>
+        <item name="android:textColor">@color/text_charcoal_9a</item>
+    </style>
+
+    <style name="RobotoLightWhiteXXXSmallTextStyle" parent="RobotoLightTextStyle">
+        <item name="android:textSize">@dimen/xxx_small_text</item>
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
+    <style name="RobotoMediumWhiteXXSmallTextStyle" parent="RobotoMediumTextStyle">
+        <item name="android:textSize">@dimen/xx_small_text</item>
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
+    <style name="RobotoRegularCharcoalXLargeTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/x_large_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="RobotoRegularCharcoalXXXXLargeTextStyle" parent="RobotoRegularTextStyle">
+        <item name="android:textSize">@dimen/xxxx_large_text</item>
+        <item name="android:textColor">@color/text_charcoal</item>
+    </style>
+
+    <style name="CelestialBlueCheckBoxStyle">
+        <item name="colorAccent">@color/bg_celestialBlue</item>
+        <item name="android:textColorSecondary">@color/text_celestialBlue</item>
+    </style>
+
+    <style name="SeaBlueEditTextStyle">
+        <item name="colorControlNormal">@color/control_sea_blue</item>
+        <item name="colorControlActivated">@color/control_sea_blue</item>
+    </style>
 </resources>

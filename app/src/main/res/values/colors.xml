@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="darkCerulean">#1B5172</color>
+    <color name="darkCerulean_CC">#CC1B5172</color>
+    <color name="veryDarkBlue">#16435F</color>
+    <color name="black_1f">#1f000000</color>
+    <color name="timberwolf_1f">#80d8d8d8</color>
+    <color name="charcoal">#ff2a3351</color>
+    <color name="charcoal_3D">#3D2a3351</color>
+    <color name="charcoal_9a">#9a2a3351</color>
+    <color name="charcoal_80">#802a3351</color>
+    <color name="white">#ffffffff</color>
+    <color name="white_73">#73ffffff</color>
+    <color name="black_7D">#7D000000</color>
+    <color name="darkCerulean_7D">#7D1B5172</color>
+    <color name="white_7D">#7Dffffff</color>
+    <color name="celestialBlue">#ff539bc6</color>
+    <color name="seaBlue">#ff126496</color>
+    <color name="seaBlue_b4">#b4126496</color>
+    <color name="roseMadder">#ffe7273f</color>
+    <color name="paleAqua">#ffbed3de</color>
+    <color name="manatee">#ff999999</color>
+
+    <color name="colorPrimary">@color/darkCerulean</color>
+    <color name="colorPrimaryDark">@color/veryDarkBlue</color>
+    <color name="colorAccent">@color/darkCerulean</color>
+
+    <color name="bg_darkCerulean">@color/darkCerulean</color>
+    <color name="bg_black_1f">@color/black_1f</color>
+    <color name="bg_timberwolf_1f">@color/timberwolf_1f</color>
+    <color name="bg_white">@color/white</color>
+    <color name="bg_black_7D">@color/black_7D</color>
+    <color name="bg_white_7D">@color/white_7D</color>
+    <color name="bg_celestialBlue">@color/celestialBlue</color>
+    <color name="bg_darkCerulean_7D">@color/darkCerulean_7D</color>
+
+    <color name="text_charcoal">@color/charcoal</color>
+    <color name="text_charcoal_3D">@color/charcoal_3D</color>
+    <color name="text_darkCerulean">@color/darkCerulean</color>
+    <color name="text_darkCerulean_CC">@color/darkCerulean_CC</color>
+    <color name="text_white_73">@color/white_73</color>
+    <color name="text_white">@color/white</color>
+    <color name="text_charcoal_9a">@color/charcoal_9a</color>
+    <color name="text_charcoal_80">@color/charcoal_80</color>
+    <color name="text_celestialBlue">@color/celestialBlue</color>
+    <color name="text_seaBlue">@color/seaBlue</color>
+    <color name="text_seaBlue_b4">@color/seaBlue_b4</color>
+    <color name="text_roseMadder">@color/roseMadder</color>
+    <color name="text_paleAqua">@color/paleAqua</color>
+    <color name="text_manatee">@color/manatee</color>
+
+    <color name="tint_celestialBlue">@color/charcoal_9a</color>
+
+    <color name="control_sea_blue">@color/seaBlue</color>
 </resources>
