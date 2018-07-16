@@ -1,6 +1,7 @@
 package com.frolov.nikita.market
 
 import android.app.Application
+import android.support.annotation.StringRes
 import com.cleveroad.bootstrap.kotlin_core.utils.misc.MiscellaneousUtils
 import com.facebook.stetho.Stetho
 
@@ -19,3 +20,5 @@ class MarketApp : Application() {
     }
 
 }
+
+fun getStringApp(@StringRes stringId: Int) = MarketApp.instance.getString(stringId)

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.frolov.nikita.circlemenulayout.CircleMenuLayout
+        android:id="@+id/cmGoodsMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:id="@+id/llTechnique"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/circle"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_computer_white_24dp"/>
+
+            <TextView
+                style="@style/RobotoMediumDarkCeruleanXSmallTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:text="@string/technique"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llAppliances"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/circle"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_kitchen_white_24dp"/>
+
+            <TextView
+                style="@style/RobotoMediumDarkCeruleanXSmallTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:text="@string/appliances"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llSport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/circle"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_fitness_center_white_24dp"/>
+
+            <TextView
+                style="@style/RobotoMediumDarkCeruleanXSmallTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:text="@string/sport"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llClothes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/circle"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_beach_access_white_24dp"/>
+
+            <TextView
+                style="@style/RobotoMediumDarkCeruleanXSmallTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:text="@string/clothes"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llBusiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/circle"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_business_center_white_24dp"/>
+
+            <TextView
+                style="@style/RobotoMediumDarkCeruleanXSmallTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:text="@string/business"/>
+
+        </LinearLayout>
+
+    </com.frolov.nikita.circlemenulayout.CircleMenuLayout>
+
+</FrameLayout>

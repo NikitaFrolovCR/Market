@@ -2,6 +2,7 @@ package com.frolov.nikita.circlemenulayout
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.support.annotation.IdRes
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,9 @@ import com.frolov.nikita.circlemenulayout.CircleMenuLayout.FirstChildPosition.SO
 import com.frolov.nikita.circlemenulayout.CircleMenuLayout.StatusChild.CHOOSE
 import com.frolov.nikita.circlemenulayout.CircleMenuLayout.StatusChild.NOT_USE
 
+public interface CircleMenuInterface {
+    fun onClickItem(@IdRes id: Int)
+}
 
 class CircleMenuLayout : ViewGroup {
 
@@ -39,12 +43,18 @@ class CircleMenuLayout : ViewGroup {
     private val child: MutableList<CircleItemMenu> = mutableListOf()
     private var isAnimate: Boolean = false
 
+    private var listeners: MutableList<CircleMenuInterface> = mutableListOf()
+
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
         attrs?.let {
             //TODO set attribute from xml
         }
+    }
+
+    public fun addListener(listener: CircleMenuInterface) {
+        listeners.add(listener)
     }
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
@@ -139,7 +149,7 @@ class CircleMenuLayout : ViewGroup {
         widthAnimator.addListener(object : SimpleAnimatorListener(actionAnimationEnd = { animateToCenter(viewChoose) }) {})
     }
 
-    private fun animateJoin() {
+    private fun animateJoin(viewChoose: Int) {
         val widthAnimator = ValueAnimator.ofFloat(0f, 1f)
         widthAnimator.addUpdateListener { animation ->
             val animatedValue = animation.animatedValue as Float
@@ -155,7 +165,10 @@ class CircleMenuLayout : ViewGroup {
         }
         widthAnimator.duration = DURATION_CIRCLES_GROUP
         widthAnimator.start()
-        widthAnimator.addListener(object : SimpleAnimatorListener(actionAnimationEnd = { isAnimate = false }) {})
+        widthAnimator.addListener(object : SimpleAnimatorListener(actionAnimationEnd = {
+            isAnimate = false
+            listeners.forEach { it.onClickItem(child[viewChoose].view.id) }
+        }) {})
     }
 
     private fun animateToCenter(viewChoose: Int) {
@@ -164,7 +177,7 @@ class CircleMenuLayout : ViewGroup {
             chooseAnimate(it.view, false) {
                 with(child[viewChoose]) {
                     status = CHOOSE
-                    chooseAnimate(view, true) { animateJoin() }
+                    chooseAnimate(view, true) { animateJoin(viewChoose) }
                 }
             }
         }

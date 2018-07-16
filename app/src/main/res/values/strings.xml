@@ -9,5 +9,12 @@
     <string name="dialog_subtitle_default">Something went wrong</string>
     <string name="dialog_ok">OK</string>
 
+    <!--navigation-->
+    <string name="technique">Technique</string>
+    <string name="appliances">Appliances</string>
+    <string name="sport">Sport</string>
+    <string name="clothes">Clothes</string>
+    <string name="business">Business</string>
+
 
 </resources>
