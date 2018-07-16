@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlRootContainer"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_item_venue"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    tools:ignore="KeyboardInaccessibleWidget">
+
+    <ImageView
+        android:id="@+id/ivImageGoods"
+        android:layout_width="@dimen/image_size_24"
+        android:layout_height="@dimen/image_size_24"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_clear_black_24dp"
+        tools:ignore="ContentDescription"/>
+
+    <TextView
+        android:id="@+id/tvGoodsName"
+        style="@style/RobotoRegularCharcoalMediumTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvGoodsDescription"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="60dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:text="Bodo Schloss"/>
+
+    <TextView
+        android:id="@+id/tvGoodsDescription"
+        style="@style/RobotoRegularCharcoalXXXSmallTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="60dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:text="200 York Way, London N7 9AX"/>
+
+</RelativeLayout>

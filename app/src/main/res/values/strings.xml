@@ -16,5 +16,8 @@
     <string name="clothes">Clothes</string>
     <string name="business">Business</string>
 
+    <!--goods-->
+    <string name="no_results_found">No Results Found</string>
+
 
 </resources>

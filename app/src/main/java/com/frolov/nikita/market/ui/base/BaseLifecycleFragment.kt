@@ -33,6 +33,7 @@ abstract class BaseLifecycleFragment<T : BaseViewModel> : Fragment(), BaseView, 
     companion object {
         const val NO_TOOLBAR = -1
         const val NO_TITLE = -1
+        const val TITLE_STRING = -2
     }
 
     protected var toolbar: Toolbar? = null
@@ -154,7 +155,7 @@ abstract class BaseLifecycleFragment<T : BaseViewModel> : Fragment(), BaseView, 
      *
      * @return Screen title
      */
-    protected fun getStringScreenTitle() =
+    protected open fun getStringScreenTitle() =
             if (getScreenTitle() != NO_TITLE) {
                 getString(getScreenTitle())
             } else {
