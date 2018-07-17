@@ -35,16 +35,20 @@ class GoodsFragment : BaseListFragment<GoodsViewModel, Goods, GoodsAdapter>(), G
 
     override fun observeLiveData() {
         with(viewModel) {
-            loadGoodsLiveData.observe(this@GoodsFragment, searchVenuesLiveDataObservable)
-            loadMoreGoodsLiveData.observe(this@GoodsFragment, loadMoreVenuesLiveDataObservable)
+            loadGoodsLiveData.observe(this@GoodsFragment, loadGoodsLiveDataObservable)
+            loadMoreGoodsLiveData.observe(this@GoodsFragment, loadMoreGoodsLiveDataObservable)
             refreshLiveData.observe(this@GoodsFragment, refreshObserver)
             setLoadingLiveData(loadGoodsLiveData, loadMoreGoodsLiveData, refreshLiveData)
         }
         loadInitial()
     }
 
-    private val searchVenuesLiveDataObservable = Observer<List<Goods>> { it?.let { onInitialDataLoaded(it) } }
-    private val loadMoreVenuesLiveDataObservable = Observer<List<Goods>> { it?.let { onDataRangeLoaded(it) } }
+    private val loadGoodsLiveDataObservable = Observer<List<Goods>> {
+        it?.let { onInitialDataLoaded(it) }
+    }
+    private val loadMoreGoodsLiveDataObservable = Observer<List<Goods>> {
+        it?.let { onDataRangeLoaded(it) }
+    }
     private val refreshObserver = Observer<Boolean> { it?.let { swRefreshGoods.isRefreshing = it } }
     private var goodsAdapter: GoodsAdapter? = null
     private var type by FragmentArgumentDelegate<GoodsType>()

@@ -42,6 +42,7 @@ class CircleMenuLayout : ViewGroup {
     private var radius = DEFAULT_RADIUS
     private val child: MutableList<CircleItemMenu> = mutableListOf()
     private var isAnimate: Boolean = false
+    var viewChoose: Int = CHOOSE_ITEM
 
     private var listeners: MutableList<CircleMenuInterface> = mutableListOf()
 
@@ -107,7 +108,7 @@ class CircleMenuLayout : ViewGroup {
 
         for (index in 0 until childCount) {
             getChildAt(index).takeIf { it.visibility != View.GONE }?.let {
-                if (index == CHOOSE_ITEM) {
+                if (index == viewChoose) {
                     val childWidth = it.measuredWidth
                     val childHeight = it.measuredHeight
                     val left = circleWidth.half() - childWidth.half()
@@ -124,6 +125,7 @@ class CircleMenuLayout : ViewGroup {
                     (it.tag as? Int)?.let { child[it] }
                             ?.takeIf { it.status == NOT_USE && !isAnimate }?.let {
                                 isAnimate = true
+                                viewChoose = index
                                 animateDivide(index)
                             }
                 }

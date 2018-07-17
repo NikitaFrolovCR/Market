@@ -19,6 +19,7 @@ class NavigationFragment : BaseLifecycleFragment<NavigationViewModel>(), CircleM
     override val layoutId = R.layout.fragment_navigation
 
     companion object {
+        private const val CHOOSE_TYPE_GOODS_KEY = "CHOOSE_TYPE_GOODS"
         fun newInstance() = NavigationFragment().apply {
             arguments = Bundle()
         }
@@ -32,6 +33,7 @@ class NavigationFragment : BaseLifecycleFragment<NavigationViewModel>(), CircleM
         //Do nothing
     }
 
+    private var viewChoose = 0
     private var navigationCallback: NavigationCallback? = null
 
     override fun onAttach(context: Context?) {
@@ -42,6 +44,13 @@ class NavigationFragment : BaseLifecycleFragment<NavigationViewModel>(), CircleM
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cmGoodsMenu.addListener(this)
+        if (savedInstanceState != null)
+            viewChoose = savedInstanceState.getInt(CHOOSE_TYPE_GOODS_KEY)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        cmGoodsMenu.viewChoose = viewChoose
     }
 
     override fun onDetach() {
@@ -49,7 +58,13 @@ class NavigationFragment : BaseLifecycleFragment<NavigationViewModel>(), CircleM
         super.onDetach()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(CHOOSE_TYPE_GOODS_KEY, cmGoodsMenu.viewChoose)
+    }
+
     override fun onClickItem(id: Int) {
+        viewChoose = cmGoodsMenu.viewChoose
         when (id) {
             R.id.llTechnique -> navigationCallback?.chooseCategory(TECHNIQUE)
             R.id.llAppliances -> navigationCallback?.chooseCategory(APPLIANCE)

@@ -24,7 +24,7 @@ abstract class BaseListFragment<ViewModel : BaseViewModel, M : Model<Long>, A> :
         PaginationListView where A : RecyclerView.Adapter<*>, A : Adapter<M> {
 
     companion object {
-        private const val VISIBLE_THRESHOLD = 20
+        private const val VISIBLE_THRESHOLD = 10
     }
 
     protected abstract val recyclerViewId: Int

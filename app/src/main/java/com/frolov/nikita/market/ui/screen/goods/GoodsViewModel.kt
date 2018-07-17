@@ -40,7 +40,7 @@ class GoodsViewModel(application: Application) : BaseViewModel(application) {
     fun loadGoods(type: GoodsType) {
         Flowable.fromCallable { type }
                 .map { typeGoods -> MockGoods.goods.filter { it.type == typeGoods }.take(PAGE_LIMIT) }
-                .debounce(DELAY_IN_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .delay(DELAY_IN_MILLISECONDS, TimeUnit.MILLISECONDS)
                 .compose(RxUtils.ioToMainTransformer())
                 .subscribe(loadGoodsSuccessConsumer, refreshErrorConsumer)
     }
@@ -48,8 +48,11 @@ class GoodsViewModel(application: Application) : BaseViewModel(application) {
     fun loadMoreGoods(offset: Int, type: GoodsType) {
         refreshLiveData.value = true
         Flowable.fromCallable { type }
-                .map { typeGoods -> MockGoods.goods.filter { it.type == typeGoods }.subList(offset, offset + PAGE_LIMIT) }
-                .debounce(DELAY_IN_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .map { typeGoods ->
+                    val list = MockGoods.goods.filter { it.type == typeGoods }
+                    list.subList(offset, offset + (if (list.size - offset >= PAGE_LIMIT) PAGE_LIMIT else list.size - offset - 1))
+                }
+                .delay(DELAY_IN_MILLISECONDS, TimeUnit.MILLISECONDS)
                 .compose(RxUtils.ioToMainTransformer())
                 .subscribe(loadMoreVenuesSuccessConsumer, refreshErrorConsumer)
     }
