@@ -3,7 +3,6 @@ package com.frolov.nikita.market.ui.screen
 import android.os.Bundle
 import com.frolov.nikita.market.R
 import com.frolov.nikita.market.models.goods.GoodsType
-import com.frolov.nikita.market.models.goods.GoodsType.TECHNIQUE
 import com.frolov.nikita.market.ui.base.BaseLifecycleActivity
 import com.frolov.nikita.market.ui.screen.goods.GoodsFragment
 import com.frolov.nikita.market.ui.screen.navigation.NavigationCallback
@@ -20,7 +19,7 @@ class MainActivity : BaseLifecycleActivity<MainViewModel>(), NavigationCallback 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        replaceFragment(NavigationFragment.newInstance(), false)
+        if (savedInstanceState == null) replaceFragment(NavigationFragment.newInstance(), false)
     }
 
     override fun chooseCategory(type: GoodsType) {

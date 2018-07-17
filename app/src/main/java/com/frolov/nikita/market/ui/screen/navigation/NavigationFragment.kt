@@ -60,7 +60,7 @@ class NavigationFragment : BaseLifecycleFragment<NavigationViewModel>(), CircleM
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putInt(CHOOSE_TYPE_GOODS_KEY, cmGoodsMenu.viewChoose)
+        outState.putInt(CHOOSE_TYPE_GOODS_KEY, viewChoose)
     }
 
     override fun onClickItem(id: Int) {

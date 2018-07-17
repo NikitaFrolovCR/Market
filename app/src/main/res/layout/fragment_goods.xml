@@ -20,15 +20,15 @@
             android:layout_height="match_parent"
             tools:listitem="@layout/goods_item"/>
 
-        <TextView
-            android:id="@+id/tvNoResults"
-            style="@style/RobotoRegularCharcoal9AXLargeTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/no_results_found"
-            android:visibility="invisible"/>
-
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/tvNoResults"
+        style="@style/RobotoRegularCharcoal9AXLargeTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_results_found"
+        android:visibility="invisible"/>
 
 </RelativeLayout>
