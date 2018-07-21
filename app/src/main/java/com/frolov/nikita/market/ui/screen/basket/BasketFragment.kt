@@ -40,7 +40,7 @@ class BasketFragment : BaseLifecycleFragment<BasketViewModel>(), PurchasesUpdate
                 if (billingResponseCode == BillingClient.BillingResponse.OK) {
                     // The billing client is ready. You can query purchases here.
                     val skuList = ArrayList<String>()
-                    skuList.add("android.test.purchased")
+                    skuList.add("product")
                     val params = SkuDetailsParams.newBuilder()
                     params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP)
                     billingClient.querySkuDetailsAsync(params.build()) { responseCode: Int, skuDetailsList: List<SkuDetails>? ->
@@ -49,8 +49,8 @@ class BasketFragment : BaseLifecycleFragment<BasketViewModel>(), PurchasesUpdate
                             for (skuDetails in skuDetailsList) {
                                 val sku = skuDetails.sku
                                 val price = skuDetails.price
-                                if ("android.test.purchased" == sku) {
-                                    toast("android.test.purchased $price")
+                                if ("product" == sku) {
+                                    toast("product $price")
                                 }
                             }
                         }
@@ -67,7 +67,7 @@ class BasketFragment : BaseLifecycleFragment<BasketViewModel>(), PurchasesUpdate
 
     private fun purchase() {
         val flowParams = BillingFlowParams.newBuilder()
-                .setSku("android.test.purchased")
+                .setSku("product")
                 .setType(BillingClient.SkuType.INAPP) // SkuType.SUB for subscription
                 .build()
         val responseCode = billingClient.launchBillingFlow(activity, flowParams)
@@ -77,7 +77,7 @@ class BasketFragment : BaseLifecycleFragment<BasketViewModel>(), PurchasesUpdate
         purchases?.let {
             for (purchase in purchases) {
                 when (purchase.getSku()) {
-                    "android.test.purchased" -> {
+                    "product" -> {
                         billingClient.consumeAsync(purchase.purchaseToken) { responseCode, purchaseToken ->
                             //inapp:com.frolov.nikita.market:android.test.purchased
                         }
