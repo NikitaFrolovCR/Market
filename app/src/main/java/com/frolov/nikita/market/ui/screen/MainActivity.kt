@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.frolov.nikita.market.R
 import com.frolov.nikita.market.models.goods.GoodsType
 import com.frolov.nikita.market.ui.base.BaseLifecycleActivity
+import com.frolov.nikita.market.ui.screen.basket.BasketFragment
 import com.frolov.nikita.market.ui.screen.goods.GoodsFragment
 import com.frolov.nikita.market.ui.screen.navigation.NavigationCallback
 import com.frolov.nikita.market.ui.screen.navigation.NavigationFragment
@@ -25,4 +26,9 @@ class MainActivity : BaseLifecycleActivity<MainViewModel>(), NavigationCallback 
     override fun chooseCategory(type: GoodsType) {
         replaceFragment(GoodsFragment.newInstance(type), true)
     }
+
+    override fun showBasket() {
+        replaceFragment(BasketFragment.newInstance(), true)
+    }
+
 }

@@ -12,6 +12,8 @@ import kotlinx.android.synthetic.main.fragment_navigation.*
 
 interface NavigationCallback {
     fun chooseCategory(type: GoodsType)
+
+    fun showBasket()
 }
 
 class NavigationFragment : BaseLifecycleFragment<NavigationViewModel>(), CircleMenuInterface {
@@ -70,7 +72,10 @@ class NavigationFragment : BaseLifecycleFragment<NavigationViewModel>(), CircleM
             R.id.llAppliances -> navigationCallback?.chooseCategory(APPLIANCE)
             R.id.llSport -> navigationCallback?.chooseCategory(SPORT)
             R.id.llClothes -> navigationCallback?.chooseCategory(CLOTHES)
-            R.id.llBusiness -> navigationCallback?.chooseCategory(BUSINESS)
+            R.id.llBusiness -> {
+//                navigationCallback?.chooseCategory(BUSINESS)
+                navigationCallback?.showBasket()
+            }
         }
     }
 }
