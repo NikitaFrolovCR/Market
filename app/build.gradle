@@ -28,7 +28,8 @@ android {
         // Google Play Billing APIs only work with apps signed for production.
         debug {
             signingConfig signingConfigs.release
-            minifyEnabled true
+            minifyEnabled false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
