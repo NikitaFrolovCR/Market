@@ -1,17 +1,26 @@
 package com.frolov.nikita.market.ui.screen.basket
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.view.View
 import com.android.billingclient.api.*
 import com.frolov.nikita.market.R
-import com.frolov.nikita.market.ui.base.BaseLifecycleFragment
+import com.frolov.nikita.market.models.goods.Goods
+import com.frolov.nikita.market.models.goods.GoodsType
+import com.frolov.nikita.market.models.goods.GoodsType.*
+import com.frolov.nikita.market.ui.base.pagination.BaseListFragment
+import com.frolov.nikita.market.ui.screen.goods.GoodsAdapter
+import com.frolov.nikita.market.ui.screen.goods.GoodsAdapterCallback
 import kotlinx.android.synthetic.main.fragment_basket.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.toast
 
-class BasketFragment : BaseLifecycleFragment<BasketViewModel>(), PurchasesUpdatedListener {
+class BasketFragment : BaseListFragment<BasketViewModel, Goods, GoodsAdapter>(), GoodsAdapterCallback, PurchasesUpdatedListener {
     override val viewModelClass = BasketViewModel::class.java
     override val layoutId = R.layout.fragment_basket
+    override val recyclerViewId = R.id.rvGoods
+    override val noResultViewId = R.id.tvNoResults
+    override val refreshLayoutId = R.id.swRefreshGoods
 
     companion object {
         fun newInstance() = BasketFragment().apply {
@@ -19,40 +28,55 @@ class BasketFragment : BaseLifecycleFragment<BasketViewModel>(), PurchasesUpdate
         }
     }
 
-    override fun getScreenTitle() = NO_TITLE
-    override fun hasToolbar() = false
-    override fun getToolbarId() = NO_TOOLBAR
+    override fun getScreenTitle() = R.string.basket
+    override fun hasToolbar() = true
+    override fun getToolbarId() = R.id.toolbar
+
+    override fun getAdapter() = goodsAdapter
+            ?: GoodsAdapter(ctx, this).apply { goodsAdapter = this }
+
+    override fun loadInitial() = viewModel.loadGoods()
+    override fun loadMoreData() = viewModel.loadMoreGoods(getAdapter().all.last().id ?: 0)
 
     override fun observeLiveData() {
-        //do nothing
+        with(viewModel) {
+            loadGoodsLiveData.observe(this@BasketFragment, loadGoodsLiveDataObservable)
+            loadMoreGoodsLiveData.observe(this@BasketFragment, loadMoreGoodsLiveDataObservable)
+            refreshLiveData.observe(this@BasketFragment, refreshObserver)
+            removeGoodsLiveData.observe(this@BasketFragment, removeGoodsLiveDataObservable)
+            setLoadingLiveData(loadGoodsLiveData, loadMoreGoodsLiveData, refreshLiveData, removeGoodsLiveData)
+        }
     }
 
+    private val loadGoodsLiveDataObservable = Observer<List<Goods>> {
+        it?.let { onInitialDataLoaded(it) }
+    }
+    private val loadMoreGoodsLiveDataObservable = Observer<List<Goods>> {
+        it?.let { onDataRangeLoaded(it) }
+    }
+    private val refreshObserver = Observer<Boolean> { it?.let { swRefreshGoods.isRefreshing = it } }
+    private val removeGoodsLiveDataObservable = Observer<Goods> {
+        it?.let {
+            goodsAdapter?.notifyDataSetChanged()
+            toast("You bought ${it.name}! Congratulations!!!")
+        }
+    }
+    private var goodsAdapter: GoodsAdapter? = null
     private lateinit var billingClient: BillingClient
+    private var chooseGoods: Goods? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bPurchase.setOnClickListener {
-            purchase()
-        }
         billingClient = BillingClient.newBuilder(ctx).setListener(this).build()
         billingClient.startConnection(object : BillingClientStateListener {
             override fun onBillingSetupFinished(@BillingClient.BillingResponse billingResponseCode: Int) {
                 if (billingResponseCode == BillingClient.BillingResponse.OK) {
-                    // The billing client is ready. You can query purchases here.
-                    val skuList = ArrayList<String>()
-                    skuList.add("product")
                     val params = SkuDetailsParams.newBuilder()
+                    val skuList = listOf(TECHNIQUE(), APPLIANCE(), SPORT(), CLOTHES())
                     params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP)
                     billingClient.querySkuDetailsAsync(params.build()) { responseCode: Int, skuDetailsList: List<SkuDetails>? ->
-                        // Process the result.
                         if (responseCode == BillingClient.BillingResponse.OK && skuDetailsList != null) {
-                            for (skuDetails in skuDetailsList) {
-                                val sku = skuDetails.sku
-                                val price = skuDetails.price
-                                if ("product" == sku) {
-                                    toast("product $price")
-                                }
-                            }
+                            viewModel.updatePrice(skuDetailsList.map { GoodsType.fromValue(it.sku) to (it.price) })
                         }
                     }
                 }
@@ -65,25 +89,19 @@ class BasketFragment : BaseLifecycleFragment<BasketViewModel>(), PurchasesUpdate
         })
     }
 
-    private fun purchase() {
+    override fun onClickItem(goods: Goods) {
+        chooseGoods = goods
         val flowParams = BillingFlowParams.newBuilder()
-                .setSku("product")
-                .setType(BillingClient.SkuType.INAPP) // SkuType.SUB for subscription
+                .setSku(goods.type?.invoke())
+                .setType(BillingClient.SkuType.INAPP)
                 .build()
-        val responseCode = billingClient.launchBillingFlow(activity, flowParams)
+        billingClient.launchBillingFlow(activity, flowParams)
     }
 
     override fun onPurchasesUpdated(responseCode: Int, purchases: MutableList<Purchase>?) {
-        purchases?.let {
-            for (purchase in purchases) {
-                when (purchase.getSku()) {
-                    "product" -> {
-                        billingClient.consumeAsync(purchase.purchaseToken) { responseCode, purchaseToken ->
-                            //inapp:com.frolov.nikita.market:android.test.purchased
-                        }
-                        toast("You are Premium! Congratulations!!!")
-                    }
-                }
+        purchases?.first()?.let {
+            billingClient.consumeAsync(it.purchaseToken) { _, _ ->
+                chooseGoods?.let { goods -> viewModel.removeGoods(goods) }
             }
         }
     }

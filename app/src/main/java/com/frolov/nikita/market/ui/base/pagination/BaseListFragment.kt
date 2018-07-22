@@ -87,7 +87,7 @@ abstract class BaseListFragment<ViewModel : BaseViewModel, M : Model<Long>, A> :
     protected fun onDataRangeLoaded(newData: List<M>) {
         checkEndlessScroll(newData)
         getAdapter()?.dataRangeLoad(newData)
-        checkNoResults(newData.size)
+        checkNoResults(getAdapter()?.itemCount ?: 0)
         endlessScrollListener?.updateNeedToLoad(true)
     }
 

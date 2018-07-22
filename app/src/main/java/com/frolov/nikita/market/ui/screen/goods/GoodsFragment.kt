@@ -38,6 +38,7 @@ class GoodsFragment : BaseListFragment<GoodsViewModel, Goods, GoodsAdapter>(), G
             loadGoodsLiveData.observe(this@GoodsFragment, loadGoodsLiveDataObservable)
             loadMoreGoodsLiveData.observe(this@GoodsFragment, loadMoreGoodsLiveDataObservable)
             refreshLiveData.observe(this@GoodsFragment, refreshObserver)
+            addGoodsLiveData.observe(this@GoodsFragment, addGoodsObserver)
             setLoadingLiveData(loadGoodsLiveData, loadMoreGoodsLiveData, refreshLiveData)
         }
         loadInitial()
@@ -50,10 +51,15 @@ class GoodsFragment : BaseListFragment<GoodsViewModel, Goods, GoodsAdapter>(), G
         it?.let { onDataRangeLoaded(it) }
     }
     private val refreshObserver = Observer<Boolean> { it?.let { swRefreshGoods.isRefreshing = it } }
+    private val addGoodsObserver = Observer<Goods> {
+        it?.let {
+            toast("Goods ${it.id}: ${it.type?.getNameCategory()} added to basket!")
+        }
+    }
     private var goodsAdapter: GoodsAdapter? = null
     private var type by FragmentArgumentDelegate<GoodsType>()
 
     override fun onClickItem(goods: Goods) {
-        toast(goods.id.toString())
+        viewModel.addGoodsToBasket(goods)
     }
 }

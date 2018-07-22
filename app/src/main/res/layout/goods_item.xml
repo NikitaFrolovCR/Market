@@ -31,6 +31,19 @@
         tools:text="Bodo Schloss"/>
 
     <TextView
+        android:id="@+id/tvGoodsPrice"
+        style="@style/RobotoRegularSeaBlueMediumTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvGoodsDescription"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="60dp"
+        android:layout_alignParentEnd="true"
+        android:ellipsize="end"
+        android:maxLines="1"
+        tools:text="10 $"/>
+
+    <TextView
         android:id="@+id/tvGoodsDescription"
         style="@style/RobotoRegularCharcoalXXXSmallTextStyle"
         android:layout_width="wrap_content"

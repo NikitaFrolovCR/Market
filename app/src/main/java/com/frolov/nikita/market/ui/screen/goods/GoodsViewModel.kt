@@ -3,6 +3,7 @@ package com.frolov.nikita.market.ui.screen.goods
 import android.app.Application
 import android.arch.lifecycle.MutableLiveData
 import com.frolov.nikita.PAGE_LIMIT
+import com.frolov.nikita.market.database.DatabaseModuleImpl
 import com.frolov.nikita.market.models.goods.Goods
 import com.frolov.nikita.market.models.goods.GoodsType
 import com.frolov.nikita.market.network.MockGoods
@@ -17,14 +18,19 @@ class GoodsViewModel(application: Application) : BaseViewModel(application) {
         private const val DELAY_IN_MILLISECONDS = 1500L
     }
 
+    private val goodsRepository = DatabaseModuleImpl.getGoodsRepository()
+
     val loadGoodsLiveData = MutableLiveData<List<Goods>>()
 
     val loadMoreGoodsLiveData = MutableLiveData<List<Goods>>()
 
     val refreshLiveData = MutableLiveData<Boolean>()
 
+    val addGoodsLiveData = MutableLiveData<Goods>()
+
     private val loadGoodsSuccessConsumer = Consumer<List<Goods>> {
         loadGoodsLiveData.value = it
+        refreshLiveData.value = true
     }
 
     private val loadMoreVenuesSuccessConsumer = Consumer<List<Goods>> {
@@ -37,7 +43,12 @@ class GoodsViewModel(application: Application) : BaseViewModel(application) {
         refreshLiveData.value = false
     }
 
+    private val addGoodsLiveDataSuccessConsumer = Consumer<Goods> {
+        addGoodsLiveData.value = it
+    }
+
     fun loadGoods(type: GoodsType) {
+        refreshLiveData.value = true
         Flowable.fromCallable { type }
                 .map { typeGoods -> MockGoods.goods.filter { it.type == typeGoods }.take(PAGE_LIMIT) }
                 .delay(DELAY_IN_MILLISECONDS, TimeUnit.MILLISECONDS)
@@ -55,6 +66,13 @@ class GoodsViewModel(application: Application) : BaseViewModel(application) {
                 .delay(DELAY_IN_MILLISECONDS, TimeUnit.MILLISECONDS)
                 .compose(RxUtils.ioToMainTransformer())
                 .subscribe(loadMoreVenuesSuccessConsumer, refreshErrorConsumer)
+    }
+
+    fun addGoodsToBasket(goods: Goods) {
+        Flowable.fromCallable { goods }
+                .flatMap { goodsRepository.saveGoods(goods) }
+                .compose(RxUtils.ioToMainTransformer())
+                .subscribe(addGoodsLiveDataSuccessConsumer, refreshErrorConsumer)
     }
 
 }

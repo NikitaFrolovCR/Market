@@ -43,6 +43,7 @@ class GoodsAdapter(context: Context, callback: GoodsAdapterCallback) :
         private val ivImageGoods = itemView.find<ImageView>(R.id.ivImageGoods)
         private val tvGoodsName = itemView.find<TextView>(R.id.tvGoodsName)
         private val tvGoodsDescription = itemView.find<TextView>(R.id.tvGoodsDescription)
+        private val tvGoodsPrice = itemView.find<TextView>(R.id.tvGoodsPrice)
         private val rlRootContainer = itemView.find<View>(R.id.rlRootContainer)
 
         companion object {
@@ -62,6 +63,7 @@ class GoodsAdapter(context: Context, callback: GoodsAdapterCallback) :
                     ?: ivImageGoods.loadImage(R.drawable.ic_clear_black_24dp)
             tvGoodsName.text = goods.name
             tvGoodsDescription.text = goods.description
+            tvGoodsPrice.text = goods.price
         }
     }
 }

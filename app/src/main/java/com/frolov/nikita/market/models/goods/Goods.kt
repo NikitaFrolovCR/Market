@@ -13,7 +13,7 @@ interface Goods : Model<Long> {
     var description: String?
     var type: GoodsType?
     var image: String?
-    var price: Long?
+    var price: String?
 }
 
 class GoodsModel(override var id: Long? = null,
@@ -21,7 +21,7 @@ class GoodsModel(override var id: Long? = null,
                  override var description: String? = EMPTY_STRING_VALUE,
                  override var type: GoodsType? = TECHNIQUE,
                  override var image: String? = EMPTY_STRING_VALUE,
-                 override var price: Long? = 0) : Goods {
+                 override var price: String? = EMPTY_STRING_VALUE) : Goods {
 
     companion object {
         @JvmField

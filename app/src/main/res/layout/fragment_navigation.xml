@@ -103,7 +103,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/llBusiness"
+            android:id="@+id/llBasket"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -114,14 +114,14 @@
                 android:layout_gravity="center"
                 android:background="@drawable/circle"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_business_center_white_24dp"/>
+                android:src="@drawable/ic_shopping_basket_white_24dp"/>
 
             <TextView
                 style="@style/RobotoMediumDarkCeruleanXSmallTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center"
-                android:text="@string/business"/>
+                android:text="@string/basket"/>
 
         </LinearLayout>
 

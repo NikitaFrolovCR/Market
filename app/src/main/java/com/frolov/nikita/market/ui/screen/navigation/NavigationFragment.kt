@@ -72,10 +72,7 @@ class NavigationFragment : BaseLifecycleFragment<NavigationViewModel>(), CircleM
             R.id.llAppliances -> navigationCallback?.chooseCategory(APPLIANCE)
             R.id.llSport -> navigationCallback?.chooseCategory(SPORT)
             R.id.llClothes -> navigationCallback?.chooseCategory(CLOTHES)
-            R.id.llBusiness -> {
-//                navigationCallback?.chooseCategory(BUSINESS)
-                navigationCallback?.showBasket()
-            }
+            R.id.llBasket -> navigationCallback?.showBasket()
         }
     }
 }
