@@ -65,14 +65,19 @@ class NavigationFragment : BaseLifecycleFragment<NavigationViewModel>(), CircleM
         outState.putInt(CHOOSE_TYPE_GOODS_KEY, viewChoose)
     }
 
-    override fun onClickItem(id: Int) {
+    override fun onClickItemBefore(id: Int) {
         viewChoose = cmGoodsMenu.viewChoose
-        when (id) {
-            R.id.llTechnique -> navigationCallback?.chooseCategory(TECHNIQUE)
-            R.id.llAppliances -> navigationCallback?.chooseCategory(APPLIANCE)
-            R.id.llSport -> navigationCallback?.chooseCategory(SPORT)
-            R.id.llClothes -> navigationCallback?.chooseCategory(CLOTHES)
-            R.id.llBasket -> navigationCallback?.showBasket()
+    }
+
+    override fun onClickItemAfter(id: Int) {
+        if(!isStateSaved){
+            when (id) {
+                R.id.llTechnique -> navigationCallback?.chooseCategory(TECHNIQUE)
+                R.id.llAppliances -> navigationCallback?.chooseCategory(APPLIANCE)
+                R.id.llSport -> navigationCallback?.chooseCategory(SPORT)
+                R.id.llClothes -> navigationCallback?.chooseCategory(CLOTHES)
+                R.id.llBasket -> navigationCallback?.showBasket()
+            }
         }
     }
 }

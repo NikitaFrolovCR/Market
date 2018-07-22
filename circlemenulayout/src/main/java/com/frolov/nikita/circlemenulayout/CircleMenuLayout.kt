@@ -12,7 +12,8 @@ import com.frolov.nikita.circlemenulayout.CircleMenuLayout.StatusChild.CHOOSE
 import com.frolov.nikita.circlemenulayout.CircleMenuLayout.StatusChild.NOT_USE
 
 public interface CircleMenuInterface {
-    fun onClickItem(@IdRes id: Int)
+    fun onClickItemBefore(@IdRes id: Int)
+    fun onClickItemAfter(@IdRes id: Int)
 }
 
 class CircleMenuLayout : ViewGroup {
@@ -42,7 +43,7 @@ class CircleMenuLayout : ViewGroup {
     private var radius = DEFAULT_RADIUS
     private val child: MutableList<CircleItemMenu> = mutableListOf()
     private var isAnimate: Boolean = false
-    private lateinit var valueAnimator: ValueAnimator
+    private var valueAnimator: ValueAnimator? = null
     var viewChoose: Int = CHOOSE_ITEM
 
     private var listeners: MutableList<CircleMenuInterface> = mutableListOf()
@@ -122,11 +123,12 @@ class CircleMenuLayout : ViewGroup {
                     localAngle += angleDelay
                 }
                 it.tag = index
-                it.setOnClickListener {
-                    (it.tag as? Int)?.let { child[it] }
+                it.setOnClickListener { view ->
+                    (view.tag as? Int)?.let { child[it] }
                             ?.takeIf { it.status == NOT_USE && !isAnimate }?.let {
                                 isAnimate = true
                                 viewChoose = index
+                                listeners.forEach { it.onClickItemBefore(view.id) }
                                 animateDivide(index)
                             }
                 }
@@ -135,11 +137,9 @@ class CircleMenuLayout : ViewGroup {
 
     }
 
-
-
     private fun animateDivide(viewChoose: Int) {
         valueAnimator = ValueAnimator.ofFloat(0f, 1f)
-        valueAnimator.addUpdateListener { animation ->
+        valueAnimator?.addUpdateListener { animation ->
             val animatedValue = animation.animatedValue as Float
             val shift = EAST_() / childCount
             var localAngle = SOUTH().toFloat()
@@ -149,14 +149,14 @@ class CircleMenuLayout : ViewGroup {
                 localAngle += shift
             }
         }
-        valueAnimator.duration = DURATION_CIRCLES_GROUP
-        valueAnimator.start()
-        valueAnimator.addListener(object : SimpleAnimatorListener(actionAnimationEnd = { animateToCenter(viewChoose) }) {})
+        valueAnimator?.duration = DURATION_CIRCLES_GROUP
+        valueAnimator?.start()
+        valueAnimator?.addListener(object : SimpleAnimatorListener(actionAnimationEnd = { animateToCenter(viewChoose) }) {})
     }
 
     private fun animateJoin(viewChoose: Int) {
         valueAnimator = ValueAnimator.ofFloat(0f, 1f)
-        valueAnimator.addUpdateListener { animation ->
+        valueAnimator?.addUpdateListener { animation ->
             val animatedValue = animation.animatedValue as Float
             val shift = EAST_() / (childCount - 1)
             var localAngle = SOUTH().toFloat()
@@ -168,11 +168,12 @@ class CircleMenuLayout : ViewGroup {
                 }
             }
         }
-        valueAnimator.duration = DURATION_CIRCLES_GROUP
-        valueAnimator.start()
-        valueAnimator.addListener(object : SimpleAnimatorListener(actionAnimationEnd = {
+        valueAnimator?.duration = DURATION_CIRCLES_GROUP
+        valueAnimator?.start()
+
+        valueAnimator?.addListener(object : SimpleAnimatorListener(actionAnimationEnd = {
             isAnimate = false
-            listeners.forEach { it.onClickItem(child[viewChoose].view.id) }
+            listeners.forEach { it.onClickItemAfter(child[viewChoose].view.id) }
         }) {})
     }
 
@@ -194,13 +195,13 @@ class CircleMenuLayout : ViewGroup {
         shift += SOUTH()
 
         valueAnimator = if (choose) ValueAnimator.ofFloat(1f, 0f) else ValueAnimator.ofFloat(0f, 1f)
-        valueAnimator.addUpdateListener { animation ->
+        valueAnimator?.addUpdateListener { animation ->
             val animatedValue = animation.animatedValue as Float
             layout(radius * animatedValue, view, shift.toFloat())
         }
-        valueAnimator.duration = DURATION_CIRCLE_CHOOSE
-        valueAnimator.start()
-        valueAnimator.addListener(object : SimpleAnimatorListener(actionAnimationEnd = { actionAnimateEnd() }) {})
+        valueAnimator?.duration = DURATION_CIRCLE_CHOOSE
+        valueAnimator?.start()
+        valueAnimator?.addListener(object : SimpleAnimatorListener(actionAnimationEnd = { actionAnimateEnd() }) {})
     }
 
     private fun layout(view: View, localAngle: Float? = null) = layout(radius, view, localAngle)
@@ -221,7 +222,7 @@ class CircleMenuLayout : ViewGroup {
     private fun Int.half() = div(2)
 
     override fun onDetachedFromWindow() {
-        valueAnimator.cancel()
+        valueAnimator?.cancel()
         super.onDetachedFromWindow()
     }
 
